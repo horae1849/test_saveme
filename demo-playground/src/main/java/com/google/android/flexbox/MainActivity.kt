@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         val connect_icon: View = findViewById(R.id.connect_icon)
         connect_icon.setOnClickListener { view ->
-            Snackbar.make(view, "Here's a Snackbar connect", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "기기와 연결 시도 중입니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
         }
