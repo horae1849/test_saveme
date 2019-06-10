@@ -20,6 +20,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import android.widget.RadioGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -28,13 +30,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.google.android.apps.flexbox.R
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+/*
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -44,10 +48,57 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
+        */
+
+
+        val menu_icon: View = findViewById(R.id.menu_icon)
+        menu_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+        }
+
+        val sidemenu_icon: View = findViewById(R.id.sidemenu_icon)
+        sidemenu_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar side", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+        }
+
+        val refesh_icon: View = findViewById(R.id.refresh_icon)
+        refesh_icon.setOnClickListener { view ->
+            Snackbar.make(view, "새로고침 완료되었습니다.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+        }
+        val connect_icon: View = findViewById(R.id.connect_icon)
+        connect_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar connect", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+        }
+        val lock_icon: View = findViewById(R.id.lock_icon)
+        lock_icon.setOnClickListener { view ->
+            Snackbar.make(view, "전체 잠금 해제되었습니다.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+        }
+
+
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val radioGroup: RadioGroup = navigationView.getHeaderView(0)
                 .findViewById(R.id.radiogroup_container_implementation)
         val fragmentManager = supportFragmentManager
+
+
+        /*
+        var menu_button:Button = findViewById(R.id.menu_icon)
+        menu_button.setOnClickListener {
+            replaceToFlexboxLayoutFragment(fragmentManager)
+        }*/
+
+
+
 
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.radiobutton_viewgroup) {

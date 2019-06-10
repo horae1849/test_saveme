@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
-    <string name="app_name">Flexbox Playground</string>
+    <string name="app_name">SAVE ME</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="one" translatable="false">1</string>
@@ -47,20 +47,20 @@ limitations under the License.
     <string name="stretch" translatable="false">Stretch</string>
     <string name="auto" translatable="false">Auto</string>
 
-    <string-array translatable="false" name="array_flex_direction">
+    <string-array name="array_flex_direction" translatable="false">
         <item>@string/row</item>
         <item>@string/row_reverse</item>
         <item>@string/column</item>
         <item>@string/column_reverse</item>
     </string-array>
 
-    <string-array translatable="false" name="array_flex_wrap">
+    <string-array name="array_flex_wrap" translatable="false">
         <item>@string/nowrap</item>
         <item>@string/wrap</item>
         <item>@string/wrap_reverse</item>
     </string-array>
 
-    <string-array translatable="false" name="array_justify_content">
+    <string-array name="array_justify_content" translatable="false">
         <item>@string/flex_start</item>
         <item>@string/flex_end</item>
         <item>@string/center</item>
@@ -69,7 +69,7 @@ limitations under the License.
         <item>@string/space_evenly</item>
     </string-array>
 
-    <string-array translatable="false" name="array_align_items">
+    <string-array name="array_align_items" translatable="false">
         <item>@string/flex_start</item>
         <item>@string/flex_end</item>
         <item>@string/center</item>
@@ -77,7 +77,7 @@ limitations under the License.
         <item>@string/stretch</item>
     </string-array>
 
-    <string-array translatable="false" name="array_align_content">
+    <string-array name="array_align_content" translatable="false">
         <item>@string/flex_start</item>
         <item>@string/flex_end</item>
         <item>@string/center</item>
@@ -86,7 +86,7 @@ limitations under the License.
         <item>@string/stretch</item>
     </string-array>
 
-    <string-array translatable="false" name="array_align_self">
+    <string-array name="array_align_self" translatable="false">
         <item>@string/auto</item>
         <item>@string/flex_start</item>
         <item>@string/flex_end</item>
@@ -135,4 +135,14 @@ limitations under the License.
     <string name="underlying_implementation">Underlying implementation</string>
     <string name="align_content_not_supported">Setting the alignContent in FlexboxLayoutManager is not supported. Ignoring.</string>
     <string name="wrap_reverse_not_supported">wrap_reverse is not supporeted in the FlexboxLayoutManager.</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

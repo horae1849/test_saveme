@@ -1,5 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?><!--
 Copyright 2016 Google Inc. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.google.android.flexbox.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <!--
+                                <ImageButton
+                                    android:id="@+id/sidemenu_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:srcCompat="@drawable/icons8_menu_vertical_64" />
+                -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/menu_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:src="@drawable/icons8_menu_64"
+                                app:backgroundTint="#FFFFFF"
+                                app:layout_anchorGravity="top"
+                                app:maxImageSize="64dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/lock_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toStartOf="@+id/connect_icon"
+                android:layout_toLeftOf="@+id/connect_icon"
+                android:src="@drawable/icons8_lock_64"
+                app:backgroundTint="#FFFFFF"
+                app:layout_anchorGravity="start|center"
+                app:maxImageSize="64dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/connect_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toStartOf="@+id/refresh_icon"
+                android:layout_toLeftOf="@+id/refresh_icon"
+                android:src="@drawable/icons8_connected_64"
+                app:backgroundTint="#FFFFFF"
+                app:maxImageSize="64dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/refresh_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toStartOf="@+id/sidemenu_icon"
+                android:layout_toLeftOf="@+id/sidemenu_icon"
+                android:src="@drawable/icons8_synchronize_64"
+                app:backgroundTint="#FFFFFF"
+                app:maxImageSize="64dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/sidemenu_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentRight="true"
+                                    android:src="@drawable/icons8_menu_vertical_64"
+                                    app:backgroundTint="#FFFFFF"
+                                    app:maxImageSize="64dp" />
+
+<!--
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <include layout="@layout/content_main" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/remove_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/second_fab_margin"
+        android:src="@drawable/icons8_minus_64"
+        app:backgroundTint="#FFFFFF"
+        app:maxImageSize="64dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/icons8_add_new_64"
+        app:backgroundTint="#FFFFFF"
+        app:maxImageSize="64dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+<!--
+
+
+<?xml version="1.0" encoding="utf-8"?>
+Copyright 2016 Google Inc. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,6 +152,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
+
+<!--
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,22 +171,27 @@ limitations under the License.
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#FAFAFC"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/remove_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/second_fab_margin"
-        android:src="@drawable/ic_remove_white_24dp" />
+        android:src="@drawable/icons8_minus_64"
+        app:backgroundTint="#EDEDED"
+        app:maxImageSize="64dp"
+        app:rippleColor="#EDEDED" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
@@ -53,6 +199,61 @@ limitations under the License.
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add_white_24dp" />
+        android:src="@drawable/icons8_add_new_64"
+        app:backgroundTint="#EDEDED"
+        app:maxImageSize="64dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/refresh_icon"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_synchronize_64"
+            app:backgroundTint="#EDEDED"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="center|top"
+            app:maxImageSize="64dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/menu_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/icons8_menu_64"
+            app:backgroundTint="#EDEDED"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="top"
+            app:maxImageSize="64dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/lock_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/icons8_lock_64"
+            app:backgroundTint="#EDEDED"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="start|center"
+            app:maxImageSize="64dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sidemenu_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/icons8_menu_vertical_64"
+            app:backgroundTint="#EDEDED"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="end|top"
+            app:maxImageSize="64dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/connect_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_connected_64"
+            app:backgroundTint="#EDEDED"
+            app:layout_anchor="@+id/include"
+            app:maxImageSize="64dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+-->

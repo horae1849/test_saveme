@@ -16,7 +16,11 @@
 
 package com.google.android.flexbox
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -28,15 +32,22 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.apps.flexbox.R
 import com.google.android.flexbox.validators.*
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+
 
 /**
  * DialogFragment that changes the properties for a flex item.
  */
 internal class FlexItemEditFragment : DialogFragment() {
+
+
+    private var MY_PERMISSIONS_REQUEST_CALL_PHONE: Int = 1000
 
     private lateinit var alignSelfAuto: String
 
@@ -88,8 +99,88 @@ internal class FlexItemEditFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+
+
+        val view = inflater.inflate(R.layout.client_status, container, false)
+        dialog.setTitle((viewIndex + 1).toString())
+
+
+        val back_icon: View = view.findViewById(R.id.back_icon)
+        back_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+            dismiss()
+        }
+
+        val profile_icon: View = view.findViewById(R.id.profile_icon)
+        profile_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+
+
+
+            /*
+            val view_profile = inflater.inflate(R.layout.detail_profile, container, false)
+            dialog.setTitle((viewIndex + 1).toString())*/
+
+        }
+
+        val phone_icon: View = view.findViewById(R.id.phone_icon)
+        phone_icon.setOnClickListener { view ->
+            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+
+            //  추후 DB에서 전화번호 가져오도록 수정
+            val number = "010-7245-1118"
+            val intent = Intent(Intent.ACTION_CALL);
+            intent.data = Uri.parse("tel:"+number)
+
+            //====권한체크부분====//
+            if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CALL_PHONE), MY_PERMISSIONS_REQUEST_CALL_PHONE)
+                //권한을 허용하지 않는 경우
+            } else {
+                //권한을 허용한 경우
+                try {
+                    startActivity(intent)
+                } catch (e: SecurityException) {
+                    e.printStackTrace()
+                }
+
+            }
+
+
+        }
+
+        val lock_icon: View = view.findViewById(R.id.lock_icon)
+        lock_icon.setOnClickListener { view ->
+            Snackbar.make(view, "잠금해제 되었습니다.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
         val view = inflater.inflate(R.layout.fragment_flex_item_edit, container, false)
         dialog.setTitle((viewIndex + 1).toString())
+
 
         val context = activity ?: return view
         val orderTextInput: TextInputLayout = view.findViewById(R.id.input_layout_order)
@@ -227,6 +318,8 @@ internal class FlexItemEditFragment : DialogFragment() {
             }
             dismiss()
         })
+
+        */
         return view
     }
 
