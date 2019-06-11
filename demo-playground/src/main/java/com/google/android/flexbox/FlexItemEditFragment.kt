@@ -122,7 +122,8 @@ internal class FlexItemEditFragment : DialogFragment() {
                     .show()
 
 
-
+            val intent = Intent (getActivity(), DetailProfileActivity::class.java)
+            startActivity(intent)
 
             /*
             val view_profile = inflater.inflate(R.layout.detail_profile, container, false)
