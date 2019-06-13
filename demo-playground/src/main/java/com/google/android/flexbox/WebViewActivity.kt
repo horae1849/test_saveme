@@ -226,6 +226,7 @@ class WebViewActivity : AppCompatActivity() {
             }
         }
     }
+    //  https://icircuit.net/android-connecting-wifi-programmatically/1814
 
 
 
