@@ -29,10 +29,17 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.webview.*
 
 
+
+
+
 //public class IntroActivity : AppCompatActivity(){
 class WebViewActivity : AppCompatActivity() {
     val TAG:String="WebViewActivity";
     private val url = "https://www.google.com"
+    object Config{
+        const val SSID="\"ssid\""
+        const val PASS="\"passphrase\""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,6 +158,11 @@ class WebViewActivity : AppCompatActivity() {
                 // Go to forward history
                 web_view.goForward()
             }
+        }
+
+        Wifi_Connect.setOnClickListener{
+            toast("Changing wifi to "+Config.SSID)
+            connectToWPAWiFi(Config.SSID,Config.PASS)
         }
     }
 
