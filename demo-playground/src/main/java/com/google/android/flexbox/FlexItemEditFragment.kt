@@ -35,6 +35,10 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.apps.flexbox.R
 import com.google.android.flexbox.validators.*
 import com.google.android.material.snackbar.Snackbar
@@ -169,13 +173,14 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
 
+            val intent = Intent (getActivity(), LockActivity::class.java)
+            startActivity(intent)
+
+
+
+
+
         }
-
-
-
-
-
-
 
 
         /*
