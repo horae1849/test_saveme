@@ -16,6 +16,7 @@
 
 package com.google.android.flexbox
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -76,6 +77,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "기기와 연결 시도 중입니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
+
+            val intent = Intent (this, WebViewActivity::class.java)
+            startActivity(intent)
         }
         val lock_icon: View = findViewById(R.id.lock_icon)
         lock_icon.setOnClickListener { view ->
