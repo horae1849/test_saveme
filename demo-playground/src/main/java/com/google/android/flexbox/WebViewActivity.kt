@@ -2,13 +2,19 @@ package com.google.android.flexbox
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.NetworkInfo
+import android.net.wifi.WifiConfiguration
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
@@ -25,7 +31,7 @@ import kotlinx.android.synthetic.main.webview.*
 
 //public class IntroActivity : AppCompatActivity(){
 class WebViewActivity : AppCompatActivity() {
-
+    val TAG:String="WebViewActivity";
     private val url = "https://www.google.com"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -144,6 +150,67 @@ class WebViewActivity : AppCompatActivity() {
             if(web_view.canGoForward()){
                 // Go to forward history
                 web_view.goForward()
+            }
+        }
+    }
+
+
+
+    //connects to the given ssid
+    fun connectToWPAWiFi(ssid:String,pass:String){
+        if(isConnectedTo(ssid)){ //see if we are already connected to the given ssid
+            toast("Connected to"+ssid)
+            return
+        }
+        val wm: WifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        var wifiConfig=getWiFiConfig(ssid)
+        if(wifiConfig==null){//if the given ssid is not present in the WiFiConfig, create a config for it
+            createWPAProfile(ssid,pass)
+            wifiConfig=getWiFiConfig(ssid)
+        }
+        wm.disconnect()
+        wm.enableNetwork(wifiConfig!!.networkId,true)
+        wm.reconnect()
+        Log.d(TAG,"intiated connection to SSID"+ssid);
+    }
+    fun isConnectedTo(ssid: String):Boolean{
+        val wm:WifiManager= applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        if(wm.connectionInfo.ssid == ssid){
+            return true
+        }
+        return false
+    }
+    fun getWiFiConfig(ssid: String): WifiConfiguration? {
+        val wm:WifiManager= applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wifiList=wm.configuredNetworks
+        for (item in wifiList){
+            if(item.SSID != null && item.SSID.equals(ssid)){
+                return item
+            }
+        }
+        return null
+    }
+    fun createWPAProfile(ssid: String,pass: String){
+        Log.d(TAG,"Saving SSID :"+ssid)
+        val conf = WifiConfiguration()
+        conf.SSID = ssid
+        conf.preSharedKey = pass
+        val wm:WifiManager= applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        wm.addNetwork(conf)
+        Log.d(TAG,"saved SSID to WiFiManger")
+    }
+
+    class WiFiChngBrdRcr : BroadcastReceiver(){ // shows a toast message to the user when device is connected to a AP
+        private val TAG = "WiFiChngBrdRcr"
+        override fun onReceive(context: Context, intent: Intent) {
+            val networkInfo=intent.getParcelableExtra<NetworkInfo>(WifiManager.EXTRA_NETWORK_INFO)
+            if(networkInfo.state == NetworkInfo.State.CONNECTED){
+                val bssid=intent.getStringExtra(WifiManager.EXTRA_BSSID)
+                Log.d(TAG, "Connected to BSSID:"+bssid)
+                val ssid=intent.getParcelableExtra<WifiInfo>(WifiManager.EXTRA_WIFI_INFO).ssid
+                val log="Connected to SSID:"+ssid
+                Log.d(TAG,"Connected to SSID:"+ssid)
+                Toast.makeText(context, log, Toast.LENGTH_SHORT).show()
             }
         }
     }
