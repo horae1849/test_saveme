@@ -86,6 +86,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "전체 잠금 해제되었습니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
+
+            val intent = Intent (this, LockActivityAll::class.java)
+            startActivity(intent)
         }
 
 

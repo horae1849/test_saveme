@@ -16,36 +16,17 @@ import org.json.JSONObject
 
 import com.google.android.apps.flexbox.R
 
-class LockActivity : AppCompatActivity() {
+class LockActivityAll : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lock_all)
 
-/*
-        btn.setOnClickListener{
-            textView.text = ""
-            val queue = Volley.newRequestQueue(this)
-            val url = "http://125.132.148.9/saveme/lock_st_input.php?lock_st=1&regid=5"
-
-            // Request a string response from the provided URL.
-            val stringRequest = StringRequest(Request.Method.GET, url,
-                    Response.Listener<String> { response ->
-                        // Display the first 500 characters of the response string.
-                        textView.text = "Response is: ${response.substring(0, 500)}"
-                    },
-                    Response.ErrorListener { textView.text = "That didn't work!" })
-
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest)
-
-        }*/
-
         // Run volley json 응답 처리
         btn.setOnClickListener {
  //           val url = "https://postman-echo.com/post"
      //       val url = "http://125.132.148.9/saveme/lock_st_input.php"
-            val url = "http://125.132.148.9/saveme/lock_st_input.php?lock_st=1&regid=5"
+            val url = "http://125.132.148.9/saveme/lock_st_ch_all.php?lock_st=0"
             textView.text = ""
 
             // Post parameters

@@ -36,6 +36,7 @@
         <activity android:name="com.google.android.flexbox.DetailProfileActivity" />
         <activity android:name="com.google.android.flexbox.WebViewActivity" />
         <activity android:name="com.google.android.flexbox.LockActivity" />
+        <activity android:name="com.google.android.flexbox.LockActivityAll" />
     </application>
 
 
