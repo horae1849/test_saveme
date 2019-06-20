@@ -145,4 +145,15 @@ limitations under the License.
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+
+    <!-- side menu -->
+    <string name="company_info">"회사 소개"</string>
+    <string name="app_version">"앱 버전"</string>
+    <string name="usage">"이용 약관"</string>
+    <string name="operation_policy">"운영 정책"</string>
+    <string name="personal_privacy_policy">"개인정보 정책"</string>
+
+
+
 </resources>

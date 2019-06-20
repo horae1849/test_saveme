@@ -375,6 +375,10 @@ internal class FlexItemEditFragment : DialogFragment() {
         }
     }
 
+
+
+    //
+
     private inner class FlexEditTextWatcher internal constructor(val context: Context,
                                                                  val textInputLayout: TextInputLayout,
                                                                  val inputValidator: InputValidator,
