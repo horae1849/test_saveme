@@ -22,23 +22,32 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.RadioGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.google.android.apps.flexbox.R
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.yarolegovich.slidingrootnav.SlidingRootNav
+import android.graphics.drawable.Drawable
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
+import java.util.*
 
+//NavigationView.OnNavigationItemSelectedListener
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+
 /*
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,7 +66,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
+
+
         }
+
+
 
         val sidemenu_icon: View = findViewById(R.id.sidemenu_icon)
         sidemenu_icon.setOnClickListener { view ->

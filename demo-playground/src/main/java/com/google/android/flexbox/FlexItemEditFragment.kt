@@ -65,7 +65,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
     private lateinit var alignSelfStretch: String
 
-    private var viewIndex: Int = 0
+    private var viewIndex: Int = 0 // 초기 값 0 이지만 시작하면서 +1 하고 order 시작
 
     private lateinit var flexItem: FlexItem
 
@@ -73,6 +73,8 @@ internal class FlexItemEditFragment : DialogFragment() {
      * Instance of a [FlexItem] being edited. At first it's created as another instance from
      * the [flexItem] because otherwise changes before clicking the ok button will be
      * reflected if the [flexItem] is changed directly.
+     *
+     *
      */
     private lateinit var flexItemInEdit: FlexItem
 
@@ -126,6 +128,7 @@ internal class FlexItemEditFragment : DialogFragment() {
                     .show()
 
 
+            // 프로필 액티비티로 연결
             val intent = Intent (getActivity(), DetailProfileActivity::class.java)
             startActivity(intent)
 
@@ -172,12 +175,9 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
 
-
+            //잠금 해제 관련 액티비티 실행
             val intent = Intent (getActivity(), LockActivity::class.java)
             startActivity(intent)
-
-
-
 
 
         }
@@ -188,9 +188,10 @@ internal class FlexItemEditFragment : DialogFragment() {
         dialog.setTitle((viewIndex + 1).toString())
 
 
+
         val context = activity ?: return view
-        val orderTextInput: TextInputLayout = view.findViewById(R.id.input_layout_order)
-        val orderEdit: EditText = view.findViewById(R.id.edit_text_order)
+        val orderTextInput: TextInputLayout = view.findViewById(R.id.input_layout_order) // input_layout_order 기존 order 값
+        val orderEdit: EditText = view.findViewById(R.id.edit_text_order)   // 순서 수정되었는지 확인
         orderEdit.setText(flexItem.order.toString())
         orderEdit.addTextChangedListener(
                 FlexEditTextWatcher(context, orderTextInput, IntegerInputValidator(),
@@ -199,6 +200,14 @@ internal class FlexItemEditFragment : DialogFragment() {
             // Order is not enabled in FlexboxLayoutManager
             orderEdit.isEnabled = false
         }
+
+
+
+
+
+
+
+
 
         val flexGrowInput: TextInputLayout = view .findViewById(R.id.input_layout_flex_grow)
         val flexGrowEdit: EditText = view.findViewById(R.id.edit_text_flex_grow)
@@ -377,7 +386,23 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
 
-    //
+    // 실질적인 flexbox edit 실행 부분
+
+    /*
+
+        val context = activity ?: return view
+        val orderTextInput: TextInputLayout = view.findViewById(R.id.input_layout_order) // input_layout_order 기존 order 값
+        val orderEdit: EditText = view.findViewById(R.id.edit_text_order)   // 순서 수정되었는지 확인
+        orderEdit.setText(flexItem.order.toString())
+        orderEdit.addTextChangedListener(
+                FlexEditTextWatcher(context, orderTextInput, IntegerInputValidator(),
+                        R.string.must_be_integer))
+        if (flexItem is FlexboxLayoutManager.LayoutParams) {
+            // Order is not enabled in FlexboxLayoutManager
+            orderEdit.isEnabled = false
+        }
+
+     */
 
     private inner class FlexEditTextWatcher internal constructor(val context: Context,
                                                                  val textInputLayout: TextInputLayout,
@@ -426,6 +451,7 @@ internal class FlexItemEditFragment : DialogFragment() {
         }
     }
 
+    //새로운 flexitem 생성시 호출 되는 함수
     private fun createNewFlexItem(item: FlexItem): FlexItem {
         if (item is FlexboxLayout.LayoutParams) {
             val newItem = FlexboxLayout.LayoutParams(item.getWidth(), item.getHeight())
@@ -439,6 +465,8 @@ internal class FlexItemEditFragment : DialogFragment() {
         throw IllegalArgumentException("Unknown FlexItem: $item")
     }
 
+
+    //
     private fun copyFlexItemValues(from: FlexItem, to: FlexItem) {
         if (from !is FlexboxLayoutManager.LayoutParams) {
             to.order = from.order
@@ -460,7 +488,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         private const val FLEX_ITEM_KEY = "flex_item"
 
-        private const val VIEW_INDEX_KEY = "view_index"
+        private const val VIEW_INDEX_KEY = "view_index"  // view index 값 저장
 
         fun newInstance(flexItem: FlexItem, viewIndex: Int) = FlexItemEditFragment().apply {
             arguments = Bundle().apply {

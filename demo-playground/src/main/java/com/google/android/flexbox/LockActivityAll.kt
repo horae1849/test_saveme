@@ -26,6 +26,8 @@ class LockActivityAll : AppCompatActivity() {
         btn.setOnClickListener {
  //           val url = "https://postman-echo.com/post"
      //       val url = "http://125.132.148.9/saveme/lock_st_input.php"
+
+            //lock_st_ch_all.php 전체 잠금 해제 하는 php  lock_st가 0일 때 잠금해제
             val url = "http://125.132.148.9/saveme/lock_st_ch_all.php?lock_st=0"
             textView.text = ""
 
@@ -45,6 +47,7 @@ class LockActivityAll : AppCompatActivity() {
                         // Process the json
                         try {
                             textView.text = "Response: $response"
+
                         }catch (e:Exception){
                             textView.text = "Exception: $e"
                         }
@@ -53,6 +56,8 @@ class LockActivityAll : AppCompatActivity() {
                 // Error in request
                 textView.text = "Volley error: $it"
             })
+
+
 
             /*
               val request = JsonObjectRequest(Request.Method.POST,url,jsonObject,
@@ -83,8 +88,6 @@ class LockActivityAll : AppCompatActivity() {
             // Add the volley post request to the request queue
             VolleySingleton.getInstance(this).addToRequestQueue(request)
         }
-
-
 
 
     }

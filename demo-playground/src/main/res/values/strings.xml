@@ -155,5 +155,10 @@ limitations under the License.
     <string name="personal_privacy_policy">"개인정보 정책"</string>
 
 
+    <string name="account_balance">Account Balance</string>
+    <string name="balance_currency">$</string>
+    <string name="balance_amount">524.99</string>
+
+
 
 </resources>

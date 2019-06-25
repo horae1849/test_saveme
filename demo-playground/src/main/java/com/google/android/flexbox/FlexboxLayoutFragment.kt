@@ -63,6 +63,7 @@ class FlexboxLayoutFragment : Fragment() {
                             FlexItemChangedListenerImpl(flexContainer), i))
         }
 
+        //flexbox 추가하는 버튼
         val addFab: FloatingActionButton = activity.findViewById(R.id.add_fab)
         addFab.setOnClickListener {
             val viewIndex = flexContainer.flexItemCount
@@ -78,6 +79,7 @@ class FlexboxLayoutFragment : Fragment() {
                     FlexItemChangedListenerImpl(flexContainer), viewIndex))
             flexContainer.addView(textView)
         }
+        //flexbox 제거하는 버튼
         val removeFab: FloatingActionButton = activity.findViewById(R.id.remove_fab)
         removeFab.setOnClickListener(View.OnClickListener {
             if (flexContainer.flexItemCount == 0) {

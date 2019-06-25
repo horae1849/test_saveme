@@ -56,6 +56,7 @@ dependencies {
     implementation "com.google.android.material:material:${rootProject.materialVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'com.yarolegovich:sliding-root-nav:1.1.0'
  //   implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
 //    implementation 'codelight.studios:android-smart-login:1.2'
