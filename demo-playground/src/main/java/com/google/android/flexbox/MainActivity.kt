@@ -30,6 +30,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import android.graphics.drawable.Drawable
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
@@ -44,6 +45,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        //전역 변수 선언
+        var mApp = GlobalVar()
+        var strGlobalVar = mApp.server_address
+
+ //       Toast.makeText(this, strGlobalVar, Toast.LENGTH_LONG).show()
 
 
 

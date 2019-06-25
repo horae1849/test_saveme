@@ -35,21 +35,24 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.android.volley.toolbox.JsonObjectRequest
 import com.google.android.apps.flexbox.R
 import com.google.android.flexbox.validators.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
+import kotlinx.android.synthetic.main.lock_all.*
+import org.json.JSONObject
 
 
 /**
  * DialogFragment that changes the properties for a flex item.
  */
 internal class FlexItemEditFragment : DialogFragment() {
-
 
     private var MY_PERMISSIONS_REQUEST_CALL_PHONE: Int = 1000
 
@@ -69,6 +72,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
     private lateinit var flexItem: FlexItem
 
+
     /**
      * Instance of a [FlexItem] being edited. At first it's created as another instance from
      * the [flexItem] because otherwise changes before clicking the ok button will be
@@ -79,6 +83,8 @@ internal class FlexItemEditFragment : DialogFragment() {
     private lateinit var flexItemInEdit: FlexItem
 
     private var flexItemChangedListener: FlexItemChangedListener? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,17 +114,31 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
 
+
         val view = inflater.inflate(R.layout.client_status, container, false)
         dialog.setTitle((viewIndex + 1).toString())
+
+        val context: Context = context!!
+
+   //     val ct = container!!.context
+
+
+        //전역 변수 선언 부분
+        var mApp = GlobalVar()
+        var server_address = mApp.server_address
+
+        // viewIndex 값을 통해 환자 구분
+
 
 
         val back_icon: View = view.findViewById(R.id.back_icon)
         back_icon.setOnClickListener { view ->
-            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "인덱스 값 : "+(viewIndex+1) , Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
 
             dismiss()
+
         }
 
         val profile_icon: View = view.findViewById(R.id.profile_icon)
@@ -139,13 +159,92 @@ internal class FlexItemEditFragment : DialogFragment() {
         }
 
         val phone_icon: View = view.findViewById(R.id.phone_icon)
-        phone_icon.setOnClickListener { view ->
+        phone_icon.setOnClickListener {
+
+            /*view ->
             Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
-                    .show()
+                    .show()*/
 
 
             //  추후 DB에서 전화번호 가져오도록 수정
+
+
+            //user_st_json.php USER_TB json 으로 돌려주는 php
+            val url = "http://"+server_address+"/saveme/user_st_json.php"
+            //textView.text = ""
+
+            // Post parameters
+            // Form fields and values
+            val params = HashMap<String,String>()
+            //          params["foo1"] = "bar1"
+            //        params["foo2"] = "bar2"
+            //params["lock_st"] = "1"
+            params["REG_ID"] = viewIndex.toString()
+            val jsonObject = JSONObject(params)
+
+            // Volley post request with parameters
+
+            /*
+            val request = StringRequest(Request.Method.POST,url,
+                    Response.Listener { response ->
+                        // Process the json
+                        try {
+                            textView.text = "Response: $response"
+
+                        }catch (e:Exception){
+                            textView.text = "Exception: $e"
+                        }
+
+                    }, Response.ErrorListener{
+                // Error in request
+                textView.text = "Volley error: $it"
+            })*/
+
+
+              val request = JsonObjectRequest(Request.Method.GET,url,jsonObject,
+                      Response.Listener { response ->
+                          // Process the json
+                          try {
+                             // textView.text = "Response: $response"
+                             //context.toast("Response: $response")
+                              val tel=response.getJSONArray("USER_ST")
+
+                          //   val jsonParser :JsonParser = JsonParser()
+                          //    val jsonElement:JsonElement=jsonParser.parse(res)
+
+
+                              context.toast("$tel")
+
+                          }catch (e:Exception){
+                             // textView.text = "Exception: $e"
+                            context.toast("Exception: $e")
+                          }
+
+                      }, Response.ErrorListener{
+                  // Error in request
+                  //textView.text = "Volley error: $it"
+                  context.toast("Volley error: $it")
+              })
+
+
+
+
+            // Volley request policy, only one time request to avoid duplicate transaction
+            request.retryPolicy = DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    // 0 means no retry
+                    0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+                    1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            )
+
+            // Add the volley post request to the request queue
+
+                VolleySingleton.getInstance(context).addToRequestQueue(request)
+
+
+
+            /*
             val number = "010-7245-1118"
             val intent = Intent(Intent.ACTION_CALL);
             intent.data = Uri.parse("tel:"+number)
@@ -162,7 +261,7 @@ internal class FlexItemEditFragment : DialogFragment() {
                     e.printStackTrace()
                 }
 
-            }
+            }*/
 
 
         }
@@ -387,6 +486,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
     // 실질적인 flexbox edit 실행 부분
+    //
 
     /*
 
@@ -404,6 +504,9 @@ internal class FlexItemEditFragment : DialogFragment() {
 
      */
 
+
+
+    //
     private inner class FlexEditTextWatcher internal constructor(val context: Context,
                                                                  val textInputLayout: TextInputLayout,
                                                                  val inputValidator: InputValidator,
@@ -466,7 +569,7 @@ internal class FlexItemEditFragment : DialogFragment() {
     }
 
 
-    //
+    //item 위치 이동시 사용
     private fun copyFlexItemValues(from: FlexItem, to: FlexItem) {
         if (from !is FlexboxLayoutManager.LayoutParams) {
             to.order = from.order
@@ -498,3 +601,5 @@ internal class FlexItemEditFragment : DialogFragment() {
         }
     }
 }
+
+

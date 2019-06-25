@@ -47,6 +47,7 @@ internal class FlexItemAdapter(private val activity: AppCompatActivity,
         holder.bindTo(layoutParams[position])
     }
 
+
     fun addItem(lp: FlexboxLayoutManager.LayoutParams) {
         layoutParams.add(lp)
         notifyItemInserted(layoutParams.size - 1)

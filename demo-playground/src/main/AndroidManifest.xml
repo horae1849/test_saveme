@@ -13,6 +13,7 @@
 
 
     <application
+        android:name="com.google.android.flexbox.GlobalVar"
         android:allowBackup="true"
         android:icon="@mipmap/icons8_hospital_bed_64"
         android:label="@string/app_name"
