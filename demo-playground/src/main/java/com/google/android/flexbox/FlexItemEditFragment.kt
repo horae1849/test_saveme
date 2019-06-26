@@ -127,6 +127,8 @@ internal class FlexItemEditFragment : DialogFragment() {
         var mApp = GlobalVar()
         var server_address = mApp.server_address
 
+        var tel=" "
+
         // viewIndex 값을 통해 환자 구분
 
 
@@ -170,6 +172,7 @@ internal class FlexItemEditFragment : DialogFragment() {
             //  추후 DB에서 전화번호 가져오도록 수정
 
 
+
             //user_st_json.php USER_TB json 으로 돌려주는 php
             val url = "http://"+server_address+"/saveme/user_st_json.php"
             //textView.text = ""
@@ -208,13 +211,75 @@ internal class FlexItemEditFragment : DialogFragment() {
                           try {
                              // textView.text = "Response: $response"
                              //context.toast("Response: $response")
-                              val tel=response.getJSONArray("USER_ST")
+                              val jsonarray=response.getJSONArray("USER_ST")
 
                           //   val jsonParser :JsonParser = JsonParser()
                           //    val jsonElement:JsonElement=jsonParser.parse(res)
 
 
-                              context.toast("$tel")
+                          //    context.toast("$tel")
+
+
+                              for (i in 0..(jsonarray.length() - 1)) {
+                                  val item = jsonarray.getJSONObject(i)
+
+                                  val regid = item.getString("REG_ID")
+                                  if(regid.toInt() == (viewIndex+1)){ // REG_ID 와 viewIdex를 비교하여 똑같은 값이면 TEL값 저장
+                                      tel = item.getString("USER_TEL_NO")
+                                       //context.toast("$tel")
+                                      if(tel=="null"){
+                                          context.toast("전화번호가 등록되어 있지 않습니다.")
+
+                                      }else {
+
+                                          context.toast("보호자 전화번호로 연결합니다.")
+
+                                          val intent = Intent(Intent.ACTION_CALL);
+                                          intent.data = Uri.parse("tel:" + tel)
+
+                                          //====권한체크부분====//
+                                          if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                              ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CALL_PHONE), MY_PERMISSIONS_REQUEST_CALL_PHONE)
+                                              //권한을 허용하지 않는 경우
+                                          } else {
+                                              //권한을 허용한 경우
+                                              try {
+                                                  startActivity(intent)
+                                              } catch (e: SecurityException) {
+                                                  e.printStackTrace()
+                                              }
+
+                                          }
+                                      }
+                                  }
+
+
+                              }
+
+
+
+                              /*
+                              jsonResponse = "";
+                              for (int i = 0; i < response.length(); i++) {
+
+                                  JSONObject person = (JSONObject) response
+                                          .get(i);
+
+                                  String name = person.getString("name");
+                                  String email = person.getString("email");
+                                  JSONObject phone = person
+                                          .getJSONObject("phone");
+                                  String home = phone.getString("home");
+                                  String mobile = phone.getString("mobile");
+
+                                  jsonResponse += "Name: " + name + "\n\n";
+                                  jsonResponse += "Email: " + email + "\n\n";
+                                  jsonResponse += "Home: " + home + "\n\n";
+                                  jsonResponse += "Mobile: " + mobile + "\n\n\n";
+
+                              }*/
+
+
 
                           }catch (e:Exception){
                              // textView.text = "Exception: $e"
@@ -245,23 +310,9 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
             /*
-            val number = "010-7245-1118"
-            val intent = Intent(Intent.ACTION_CALL);
-            intent.data = Uri.parse("tel:"+number)
+            var number = tel
+            context.toast("$tel")*/
 
-            //====권한체크부분====//
-            if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CALL_PHONE), MY_PERMISSIONS_REQUEST_CALL_PHONE)
-                //권한을 허용하지 않는 경우
-            } else {
-                //권한을 허용한 경우
-                try {
-                    startActivity(intent)
-                } catch (e: SecurityException) {
-                    e.printStackTrace()
-                }
-
-            }*/
 
 
         }
