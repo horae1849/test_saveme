@@ -28,12 +28,12 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.apps.flexbox.R
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.yarolegovich.slidingrootnav.SlidingRootNav
+//import com.yarolegovich.slidingrootnav.SlidingRootNav
 import android.graphics.drawable.Drawable
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
+//import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import java.util.*
 
 //NavigationView.OnNavigationItemSelectedListener
@@ -71,9 +71,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val menu_icon: View = findViewById(R.id.menu_icon)
         menu_icon.setOnClickListener { view ->
-            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "관리자 메뉴 설정을 해주십시오", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
+
 
 
         }
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val sidemenu_icon: View = findViewById(R.id.sidemenu_icon)
         sidemenu_icon.setOnClickListener { view ->
-            Snackbar.make(view, "Here's a Snackbar side", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "관리자 메뉴 설정을 해주십시오", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
         }

@@ -39,6 +39,7 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.google.android.apps.flexbox.R
 import com.google.android.flexbox.validators.*
 import com.google.android.material.snackbar.Snackbar
@@ -319,16 +320,56 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         val lock_icon: View = view.findViewById(R.id.lock_icon)
         lock_icon.setOnClickListener { view ->
+
             Snackbar.make(view, "잠금해제 되었습니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
 
 
+            //user_st_json.php USER_TB json 으로 돌려주는 php
+            val url = "http://"+server_address+"/saveme/lock_st_input.php?lock_st=0&regid="
+            val url2 = url+(viewIndex+1)
+  //          context.toast("잠금 해제 진행 중 입니다."+url2)
+
+
+
+
+            val request = StringRequest(Request.Method.POST,url2,
+                    Response.Listener { response ->
+                        // Process the json
+                        try {
+                            context.toast("Response: $response")
+                        }catch (e:Exception){
+                            context.toast("Exception: $e")
+                        }
+
+                    }, Response.ErrorListener{
+                // Error in request
+                context.toast("Volley error: $it")
+            })
+
+
+
+
+            // Volley request policy, only one time request to avoid duplicate transaction
+            request.retryPolicy = DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    // 0 means no retry
+                    0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+                    1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            )
+
+            // Add the volley post request to the request queue
+
+            VolleySingleton.getInstance(context).addToRequestQueue(request)
+
+
 
             //잠금 해제 관련 액티비티 실행
+            /*
             val intent = Intent (getActivity(), LockActivity::class.java)
             startActivity(intent)
-
+            */
 
         }
 

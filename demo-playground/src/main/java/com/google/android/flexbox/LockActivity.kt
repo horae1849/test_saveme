@@ -17,7 +17,7 @@ class LockActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.lock_all)
+        setContentView(R.layout.lock_part)
 
 /*
         btn.setOnClickListener{

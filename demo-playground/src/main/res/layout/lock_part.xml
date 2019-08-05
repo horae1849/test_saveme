@@ -8,7 +8,7 @@
     android:id="@+id/rootLayout"
     android:background="#fdfdfc">
     <Button
-        android:text="전체 잠금 해제"
+        android:text="부분 잠금 해제"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn"
