@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 tools:srcCompat="@drawable/camera_rec" />
--->
+
             <lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
@@ -68,7 +68,36 @@
                 android:id="@+id/chart2"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
+-->
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center">
+
+
+                <com.google.android.flexbox.HeartBeatView_past
+                    android:id="@+id/heart_beat"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+
+                <TextView
+                    android:id="@+id/heart_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/heart_beat"
+                    android:layout_weight="1"
+                    android:text=" "
+                    android:textColor="#FF7070"
+                    android:textSize="40sp" />
+
+
+            </RelativeLayout>
+
+            <com.txusballesteros.SnakeView
+                android:id="@+id/heart_snake"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
 
 
 

@@ -12,7 +12,10 @@
 
 
 
+    <!--  android:name="com.google.android.flexbox.UncaughtExceptionApp"       -->
+
     <application
+
         android:name="com.google.android.flexbox.GlobalVar"
         android:allowBackup="true"
         android:icon="@mipmap/icons8_hospital_bed_64"
@@ -39,7 +42,10 @@
         <activity android:name="com.google.android.flexbox.LockActivity" />
         <activity android:name="com.google.android.flexbox.LockActivityAll" />
         <activity android:name="com.google.android.flexbox.SampleActivity" />
+        <activity android:name="com.google.android.flexbox.HeartRateMonitor" />
     </application>
+
+
 
 
 </manifest>

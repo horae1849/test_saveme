@@ -46,6 +46,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.txusballesteros.SnakeView
 import org.json.JSONObject
+import java.lang.Thread.sleep
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -53,7 +54,7 @@ import kotlin.collections.HashMap
 /**
  * DialogFragment that changes the properties for a flex item.
  */
-internal class FlexItemEditFragment : DialogFragment() {
+internal class FlexItemEditFragment2 : DialogFragment() {
 
     private var MY_PERMISSIONS_REQUEST_CALL_PHONE: Int = 1000
 
@@ -72,8 +73,6 @@ internal class FlexItemEditFragment : DialogFragment() {
     private var viewIndex: Int = 0 // 초기 값 0 이지만 시작하면서 +1 하고 order 시작
 
     private lateinit var flexItem: FlexItem
-
-    private lateinit var beatView:HeartBeatView_past
 
 
     /**
@@ -114,6 +113,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
 
 
 
@@ -575,7 +575,7 @@ internal class FlexItemEditFragment : DialogFragment() {
         beatView.setOnClickListener(){
 
 
- //           for(i in 1..10) {
+            for(i in 1..10) {
                 var random = Random()
                 var random_num = random.nextInt(120 - 80) + 80
                 beatView.setDuration(random_num)
@@ -584,25 +584,21 @@ internal class FlexItemEditFragment : DialogFragment() {
                 heart_text.setText("" + random_num)
 
 
-//                sleep(1000)
- //               onResume()
+                sleep(1000)
 
-
-    //        }
 
             }
+
+            }
+
+
 
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-//        beatView.performClick()
-    }
 
     override fun onResume() {
         super.onResume()
- //       beatView.performClick()
 
     }
 
@@ -778,7 +774,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         private const val VIEW_INDEX_KEY = "view_index"  // view index 값 저장
 
-        fun newInstance(flexItem: FlexItem, viewIndex: Int) = FlexItemEditFragment().apply {
+        fun newInstance(flexItem: FlexItem, viewIndex: Int) = FlexItemEditFragment2().apply {
             arguments = Bundle().apply {
                 putParcelable(FLEX_ITEM_KEY, flexItem)
                 putInt(VIEW_INDEX_KEY, viewIndex)

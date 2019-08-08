@@ -19,6 +19,7 @@ public class IntroActivity extends Activity {
             public void run() {
                 Intent intent = new Intent (getApplicationContext(), MainActivity.class);
 //                Intent intent = new Intent (getApplicationContext(), SampleActivity.class);
+//                Intent intent = new Intent (getApplicationContext(), HeartRateMonitor.class);
                 startActivity(intent); //다음화면으로 넘어감
                 finish();
             }
