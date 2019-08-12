@@ -55,37 +55,87 @@
             android:orientation="vertical">
 
 
-            <EditText
-                android:id="@+id/profile_name"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이름"
+                    android:textSize="15dp"
+                    android:background="@drawable/border"/>
+
+                <EditText
+                    android:id="@+id/profile_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:background="@drawable/border"
+                    android:text="이름을 입력해주세요"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="이름" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/profile_date"
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="생년월일"
+                    android:textSize="15dp"
+                    android:background="@drawable/border"/>
+
+                <EditText
+                    android:id="@+id/profile_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:background="@drawable/border"
+                    android:text="생년월일을 입력해주세요 "
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="생년월일" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/profile_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="보호자 연락처" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="보호자 연락처"
+                    android:textSize="15dp"
+                    android:background="@drawable/border"/>
 
-            <EditText
+                <EditText
+                    android:id="@+id/profile_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:background="@drawable/border"
+                    android:text="보호자 연락처을 입력해주세요 ex)010-7245-1118"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <TextView
                 android:id="@+id/profile_unique"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="특이사항" />
+                android:background="@drawable/border"
+                android:text="특이사항"
+                android:textSize="30dp" />
 
 
         </LinearLayout>
@@ -105,8 +155,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="1.복용중인 약" />
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:background="@drawable/border"
+        android:text="1.복용중인 약"
+        android:textSize="15dp"/>
 
 
 

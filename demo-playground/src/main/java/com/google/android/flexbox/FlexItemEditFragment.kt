@@ -123,22 +123,20 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         val context: Context = context!!
 
-   //     val ct = container!!.context
-
-
         //전역 변수 선언 부분
         var mApp = GlobalVar()
         var server_address = mApp.server_address
 
         var tel=" "
+        var heart_no=" "
 
         // viewIndex 값을 통해 환자 구분
 
 
 
         var snakeView: SnakeView  = view.findViewById(R.id.heart_snake)
-        snakeView.setMinValue(0F)
-        snakeView.setMaxValue(150F)
+        snakeView.setMinValue(50F)
+        snakeView.setMaxValue(140F)
 
 
         var heart_flag=false
@@ -148,11 +146,6 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
   //      heart_text.setText(random_num)
-
-
-
-
-
 
 
         val back_icon: View = view.findViewById(R.id.back_icon)
@@ -174,6 +167,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
             // 프로필 액티비티로 연결
             val intent = Intent (getActivity(), DetailProfileActivity::class.java)
+            intent.putExtra("viewindex",(viewIndex+1))
             startActivity(intent)
 
             /*
@@ -189,9 +183,6 @@ internal class FlexItemEditFragment : DialogFragment() {
             Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()*/
-
-
-            //  추후 DB에서 전화번호 가져오도록 수정
 
 
 
@@ -562,11 +553,99 @@ internal class FlexItemEditFragment : DialogFragment() {
         beatView.start()
 
         snakeView.setOnClickListener {
+/*
             var random = Random()
-            var random_num = random.nextInt(120 - 80) + 80
-
+            var random_num = random.nextInt(115 - 95) + 95
             snakeView.addValue(random_num.toFloat())
             heart_text.setText("" + random_num)
+
+          */
+
+
+            //user_st_json.php SENEOR_TB json 으로 돌려주는 php
+            val url = "http://"+server_address+"/saveme/sensor_st_json.php"
+            //textView.text = ""
+
+            // Post parameters
+            // Form fields and values
+            val params = HashMap<String,String>()
+            //          params["foo1"] = "bar1"
+            //        params["foo2"] = "bar2"
+            //params["lock_st"] = "1"
+            params["REG_ID"] = viewIndex.toString()
+            val jsonObject = JSONObject(params)
+
+            val request = JsonObjectRequest(Request.Method.GET,url,jsonObject,
+                    Response.Listener { response ->
+                        // Process the json
+                        try {
+                            // textView.text = "Response: $response"
+                            //context.toast("Response: $response")
+                            val jsonarray=response.getJSONArray("SENSOR_ST")
+
+                            //   val jsonParser :JsonParser = JsonParser()
+                            //    val jsonElement:JsonElement=jsonParser.parse(res)
+
+
+                            //    context.toast("$tel")
+
+
+                            for (i in 0..(jsonarray.length() - 1)) {
+                                val item = jsonarray.getJSONObject(i)
+
+                                val regid = item.getString("USER_TB_USER_ID")
+                                if(regid.toInt() == (viewIndex+1)){ // REG_ID 와 viewIdex를 비교하여 똑같고, 가장 최근 심박값 저장
+                                    heart_no = item.getString("HEART_NO")
+                                    //context.toast("$tel")
+                                    if(heart_no=="null"){
+                                        context.toast("심박 데이터가 등록되어 있지 않습니다.")
+
+                                    }else {
+
+                                        snakeView.addValue(heart_no.toFloat())
+                                        heart_text.setText("" + heart_no)
+
+                                    }
+                                }
+
+
+                            }
+
+
+
+
+                        }catch (e:Exception){
+                            // textView.text = "Exception: $e"
+                            context.toast("Exception: $e")
+                        }
+
+                    }, Response.ErrorListener{
+                // Error in request
+                //textView.text = "Volley error: $it"
+                context.toast("Volley error: $it")
+            })
+
+
+
+
+            // Volley request policy, only one time request to avoid duplicate transaction
+            request.retryPolicy = DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    // 0 means no retry
+                    0, // DefaultRetryPolicy.DEFAULT_MAX_RETRIES = 2
+                    1f // DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            )
+
+            // Add the volley post request to the request queue
+
+            VolleySingleton.getInstance(context).addToRequestQueue(request)
+
+
+
+            /*
+            var number = tel
+            context.toast("$tel")*/
+
 
         }
         //시연용
@@ -577,9 +656,9 @@ internal class FlexItemEditFragment : DialogFragment() {
 
  //           for(i in 1..10) {
                 var random = Random()
-                var random_num = random.nextInt(120 - 80) + 80
-                beatView.setDuration(random_num)
-                beatView.start()
+                var random_num = random.nextInt(115 - 95) + 95
+//                beatView.setDuration(random_num)
+//                beatView.start()
                 snakeView.addValue(random_num.toFloat())
                 heart_text.setText("" + random_num)
 
