@@ -58,6 +58,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation 'com.yarolegovich:sliding-root-nav:1.1.0'
     implementation 'com.txusballesteros:snake:1.0'
+    implementation 'com.github.bumptech.glide:glide:4.2.0'
+    kapt 'com.github.bumptech.glide:compiler:4.2.0'
+    implementation "gun0912.ted:tedpermission:2.1.0"
  //   implementation 'com.github.scottyab:HeartBeatView:0.0.1'
  //   implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 

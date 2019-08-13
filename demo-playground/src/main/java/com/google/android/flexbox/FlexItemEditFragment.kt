@@ -160,9 +160,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         val profile_icon: View = view.findViewById(R.id.profile_icon)
         profile_icon.setOnClickListener { view ->
-            Snackbar.make(view, "Here's a Snackbar menu", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null)
-                    .show()
+
 
 
             // 프로필 액티비티로 연결
@@ -552,7 +550,7 @@ internal class FlexItemEditFragment : DialogFragment() {
         var beatView:HeartBeatView_past = view.findViewById(R.id.heart_beat)
         beatView.start()
 
-        snakeView.setOnClickListener {
+        beatView.setOnClickListener {
 /*
             var random = Random()
             var random_num = random.nextInt(115 - 95) + 95
@@ -579,17 +577,7 @@ internal class FlexItemEditFragment : DialogFragment() {
                     Response.Listener { response ->
                         // Process the json
                         try {
-                            // textView.text = "Response: $response"
-                            //context.toast("Response: $response")
                             val jsonarray=response.getJSONArray("SENSOR_ST")
-
-                            //   val jsonParser :JsonParser = JsonParser()
-                            //    val jsonElement:JsonElement=jsonParser.parse(res)
-
-
-                            //    context.toast("$tel")
-
-
                             for (i in 0..(jsonarray.length() - 1)) {
                                 val item = jsonarray.getJSONObject(i)
 
@@ -603,17 +591,12 @@ internal class FlexItemEditFragment : DialogFragment() {
                                     }else {
 
                                         snakeView.addValue(heart_no.toFloat())
-                                        heart_text.setText("" + heart_no)
+                                        //심박데이터 소수점 제거하여 출력
+                                        heart_text.setText(" "+heart_no.substring(0, heart_no.length-2))
 
                                     }
                                 }
-
-
                             }
-
-
-
-
                         }catch (e:Exception){
                             // textView.text = "Exception: $e"
                             context.toast("Exception: $e")
@@ -651,7 +634,7 @@ internal class FlexItemEditFragment : DialogFragment() {
         //시연용
 
 
-        beatView.setOnClickListener(){
+        snakeView.setOnClickListener(){
 
 
  //           for(i in 1..10) {
