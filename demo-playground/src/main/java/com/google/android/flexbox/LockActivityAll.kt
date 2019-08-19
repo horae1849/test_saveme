@@ -17,6 +17,7 @@ import kotlin.Exception as Exception1
 
 class LockActivityAll : AppCompatActivity() {
 
+    var mApp = GlobalVar()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lock_all)
@@ -26,9 +27,9 @@ class LockActivityAll : AppCompatActivity() {
 
         server_ip_bt.setOnClickListener{view->
 
-            GlobalVar().setGlobalString(server_ip_edit.getText().toString())
+            mApp.setGlobalString(server_ip_edit.getText().toString())
 
-            Snackbar.make(view, GlobalVar().getGlobalString()+" 로 변경이 완료되었습니다.", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, mApp.getGlobalString()+" 로 변경이 완료되었습니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
 
@@ -36,7 +37,7 @@ class LockActivityAll : AppCompatActivity() {
 
         server_ip_bt2.setOnClickListener{view->
 
-            Snackbar.make(view, "현재 서버 IP 주소는 \" "+GlobalVar().getGlobalString()+" \"입니다.", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "현재 서버 IP 주소는 \" "+mApp.getGlobalString()+" \"입니다.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
 
@@ -50,7 +51,7 @@ class LockActivityAll : AppCompatActivity() {
      //       val url = "http://125.132.148.9/saveme/lock_st_input.php"
 
             //lock_st_ch_all.php 전체 잠금 해제 하는 php  lock_st가 0일 때 잠금해제
-            val url = "http://125.132.148.9/saveme/lock_st_ch_all.php?lock_st=0"
+            val url = "http://"+mApp.server_address+"/saveme/lock_st_ch_all.php?lock_st=0"
             textView.text = ""
 
             // Post parameters

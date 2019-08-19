@@ -135,8 +135,8 @@ internal class FlexItemEditFragment : DialogFragment() {
 
 
         var snakeView: SnakeView  = view.findViewById(R.id.heart_snake)
-        snakeView.setMinValue(50F)
-        snakeView.setMaxValue(140F)
+        snakeView.setMinValue(30F)
+        snakeView.setMaxValue(180F)
 
 
         var heart_flag=false
