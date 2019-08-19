@@ -37,8 +37,8 @@ class WebViewActivity : AppCompatActivity() {
     val TAG:String="WebViewActivity";
     private val url = "https://www.google.com"
     object Config{
-        const val SSID="\"ssid\""
-        const val PASS="\"passphrase\""
+        const val SSID="\"goodluck\""
+        const val PASS="\"goodluck\""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

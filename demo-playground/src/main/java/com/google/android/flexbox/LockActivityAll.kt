@@ -12,12 +12,37 @@ import kotlinx.android.synthetic.main.lock_all.*
 import org.json.JSONObject
 
 import com.google.android.apps.flexbox.R
+import com.google.android.material.snackbar.Snackbar
+import kotlin.Exception as Exception1
 
 class LockActivityAll : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lock_all)
+
+
+
+
+        server_ip_bt.setOnClickListener{view->
+
+            GlobalVar().setGlobalString(server_ip_edit.getText().toString())
+
+            Snackbar.make(view, GlobalVar().getGlobalString()+" 로 변경이 완료되었습니다.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+        }
+
+        server_ip_bt2.setOnClickListener{view->
+
+            Snackbar.make(view, "현재 서버 IP 주소는 \" "+GlobalVar().getGlobalString()+" \"입니다.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .show()
+
+        }
+
+
 
         // Run volley json 응답 처리
         btn.setOnClickListener {

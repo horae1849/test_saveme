@@ -148,6 +148,7 @@ internal class FlexItemEditFragment : DialogFragment() {
   //      heart_text.setText(random_num)
 
 
+        // 뒤로가기 클릭시 호출됨
         val back_icon: View = view.findViewById(R.id.back_icon)
         back_icon.setOnClickListener { view ->
             Snackbar.make(view, "인덱스 값 : "+(viewIndex+1) , Snackbar.LENGTH_LONG)
@@ -174,6 +175,7 @@ internal class FlexItemEditFragment : DialogFragment() {
 
         }
 
+        // 보호자 연락처 클릭시 호출됨
         val phone_icon: View = view.findViewById(R.id.phone_icon)
         phone_icon.setOnClickListener {
 

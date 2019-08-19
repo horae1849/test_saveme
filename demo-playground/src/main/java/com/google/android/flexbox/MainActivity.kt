@@ -86,6 +86,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "관리자 메뉴 설정을 해주십시오", Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
                     .show()
+
+
+
+
         }
 
         val refesh_icon: View = findViewById(R.id.refresh_icon)
